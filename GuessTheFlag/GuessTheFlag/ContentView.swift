@@ -29,6 +29,7 @@ struct ContentView: View {
                         .font(.largeTitle)
                         .fontWeight(.black)
                 }
+                .padding(.top, 20)
                 ForEach(0..<3) {number in
                     Button(action: {
                         self.flagTapped(number)
