@@ -16,7 +16,13 @@ struct CharacterListView: View {
         NavigationView {
             List {
                 ForEach(viewModel.characters) { character in
-                    Text(character.name)
+                    VStack {
+                        Text(character.name)
+                    }.onAppear {
+                        if self.viewModel.isCharacterLast(character) {
+                            self.viewModel.loadMoreCharacters()
+                        }
+                    }
                 }
             }
             .navigationBarTitle("Персонажи")
@@ -26,6 +32,6 @@ struct CharacterListView: View {
 
 struct PersonListView_Previews: PreviewProvider {
     static var previews: some View {
-        CharacterListView()
+        CharacterListView().environmentObject(CharacterListViewModel())
     }
 }

@@ -12,19 +12,34 @@ protocol CharacterViewModelProtocol {}
 
 final class CharacterListViewModel: ObservableObject, CharacterViewModelProtocol {
     
-    private(set) var characters = [Character]()
+    @Published private(set) var characters = [Character]()
+    private var page: Int = 1
+    private(set) var dataLoading: Bool = false
     
     init() {
-        print("\(self) - \(#function)")
         self.loadCharacters()
     }
     
     func loadCharacters() {
-        print(#function)
-        RickAndMortyAPI.charactersGet() { characters, error in
+        self.dataLoading = true
+        RickAndMortyAPI.charactersGet(page: page) { characters, error in
             guard let characters = characters else { return }
-            self.characters = characters
-            
+            DispatchQueue.main.async {
+                self.characters.append(contentsOf: characters)
+            }
+            self.dataLoading = false
         }
+    }
+    
+    func loadMoreCharacters() {
+        self.page += 1
+        self.loadCharacters()
+    }
+    
+    func isCharacterLast(_ character: Character) -> Bool {
+        guard
+            let characterIndex = self.characters.firstIndex(where: { $0.id == character.id})
+        else { return false }
+        return characterIndex == self.characters.endIndex - 1
     }
 }

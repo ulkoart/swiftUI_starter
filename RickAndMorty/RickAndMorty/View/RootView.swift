@@ -37,17 +37,17 @@ struct RootView: View {
             CharacterListView()
                 .environmentObject(CharacterListViewModel())
                 .tabItem {
-                    Image(systemName: "person.3").font(.system(size: 26))
+                    Image(systemName: "person.3")
             }
             .tag(0)
             LocationListView()
                 .tabItem {
-                    Image(systemName: "location").font(.system(size: 26))
+                    Image(systemName: "location")
             }
             .tag(1)
             EpisodeListView()
                 .tabItem {
-                    Image(systemName: "film").font(.system(size: 26))
+                    Image(systemName: "film")
             }
             .tag(2)
         }
