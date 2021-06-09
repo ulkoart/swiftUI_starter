@@ -17,7 +17,10 @@ struct CharacterListView: View {
             List {
                 ForEach(viewModel.characters) { character in
                     VStack {
-                        Text(character.name)
+                        NavigationLink(destination: CharacterView(characterId: character.id)) {
+                            Text(character.name)
+                        }
+                        
                     }.onAppear {
                         if self.viewModel.isCharacterLast(character) {
                             self.viewModel.loadMoreCharacters()

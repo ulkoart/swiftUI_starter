@@ -24,9 +24,7 @@ final class CharacterListViewModel: ObservableObject, CharacterViewModelProtocol
         self.dataLoading = true
         RickAndMortyAPI.charactersGet(page: page) { characters, error in
             guard let characters = characters else { return }
-            DispatchQueue.main.async {
-                self.characters.append(contentsOf: characters)
-            }
+            self.appendCharacters(characters)
             self.dataLoading = false
         }
     }
@@ -38,8 +36,14 @@ final class CharacterListViewModel: ObservableObject, CharacterViewModelProtocol
     
     func isCharacterLast(_ character: Character) -> Bool {
         guard
-            let characterIndex = self.characters.firstIndex(where: { $0.id == character.id})
+            let index = self.characters.firstIndex(where: { $0.id == character.id})
         else { return false }
-        return characterIndex == self.characters.endIndex - 1
+        return index == self.characters.endIndex - 1
+    }
+    
+    private func appendCharacters(_ characters: [Character]) {
+        DispatchQueue.main.async {
+            self.characters.append(contentsOf: characters)
+        }
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE2152B02670DE6800A29825 /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2152AF2670DE6800A29825 /* CharacterView.swift */; };
 		CE33F4AA266F511900DB7995 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33F4A9266F511900DB7995 /* AppDelegate.swift */; };
 		CE33F4AC266F511900DB7995 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33F4AB266F511900DB7995 /* SceneDelegate.swift */; };
 		CE33F4AE266F511900DB7995 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33F4AD266F511900DB7995 /* RootView.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE2152AF2670DE6800A29825 /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
 		CE33F4A6266F511900DB7995 /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE33F4A9266F511900DB7995 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE33F4AB266F511900DB7995 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			children = (
 				CE33F4AD266F511900DB7995 /* RootView.swift */,
 				CE33F4C6266F6C9300DB7995 /* CharacterListView.swift */,
+				CE2152AF2670DE6800A29825 /* CharacterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 				CE33F4C0266F699E00DB7995 /* Character.swift in Sources */,
 				CE33F4AC266F511900DB7995 /* SceneDelegate.swift in Sources */,
 				CE33F4AE266F511900DB7995 /* RootView.swift in Sources */,
+				CE2152B02670DE6800A29825 /* CharacterView.swift in Sources */,
 				CE33F4C7266F6C9300DB7995 /* CharacterListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
