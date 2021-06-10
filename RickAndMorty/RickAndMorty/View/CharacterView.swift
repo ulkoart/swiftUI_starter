@@ -9,15 +9,28 @@
 import SwiftUI
 
 struct CharacterView: View {
-    var characterId: Int
+    var character: Character
     
     var body: some View {
-        Text("id: \(characterId)")
+        ScrollView {
+            VStack {
+                RemoteImage(url: character.image)
+                    .cornerRadius(15)
+            }
+            .frame(maxWidth: .infinity, alignment: .center)
+//            .padding(16)
+//            .background(Color.gray.opacity(0.2))
+//            .cornerRadius(15)
+            Spacer()
+        }
+        .padding(.leading, 10)
+        .padding(.trailing, 10)
+        .navigationBarTitle("\(character.name)")
     }
 }
 
-struct CharacterView_Previews: PreviewProvider {
-    static var previews: some View {
-        CharacterView(characterId: 1)
-    }
-}
+//struct CharacterView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CharacterView()
+//    }
+//}

@@ -13,8 +13,8 @@ protocol CharacterViewModelProtocol {}
 final class CharacterListViewModel: ObservableObject, CharacterViewModelProtocol {
     
     @Published private(set) var characters = [Character]()
+    @Published private(set) var dataLoading: Bool = false
     private var page: Int = 1
-    private(set) var dataLoading: Bool = false
     
     init() {
         self.loadCharacters()
@@ -25,7 +25,6 @@ final class CharacterListViewModel: ObservableObject, CharacterViewModelProtocol
         RickAndMortyAPI.charactersGet(page: page) { characters, error in
             guard let characters = characters else { return }
             self.appendCharacters(characters)
-            self.dataLoading = false
         }
     }
     
@@ -40,10 +39,11 @@ final class CharacterListViewModel: ObservableObject, CharacterViewModelProtocol
         else { return false }
         return index == self.characters.endIndex - 1
     }
-    
+       
     private func appendCharacters(_ characters: [Character]) {
         DispatchQueue.main.async {
             self.characters.append(contentsOf: characters)
+            self.dataLoading = false
         }
     }
 }

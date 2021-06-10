@@ -11,4 +11,5 @@ import Foundation
 struct Character: Codable, Identifiable, Equatable {
     let id: Int
     let name: String
+    let image: String
 }
