@@ -10,23 +10,56 @@ import Foundation
 import SwiftUI
 import Combine
 
+class ImageCacheProvider {
+    private var imageCache = NSCache<NSString, UIImage>()
+    
+    static var shared: ImageCacheProvider = {
+        let instance = ImageCacheProvider()
+        return instance
+    }()
+    
+    private init() {}
+    
+    func getCashedImage(url: String) -> UIImage? {
+        return imageCache.object(forKey: url as NSString)
+    }
+    
+    func setCashedImage(image: UIImage, url: String) -> Void {
+        self.imageCache.setObject(image, forKey: url as NSString)
+    }
+}
+
 class ImageLoader: ObservableObject {
     @Published var downloadImage: UIImage?
+    let imageCacheProvider: ImageCacheProvider = ImageCacheProvider.shared
     
     func fetchImage(url: String) {
-        guard let imageURL = URL(string: url) else { return }
         
-        URLSession.shared.dataTask(with: imageURL) {data, response, error in
+        if let cashedImage = imageCacheProvider.getCashedImage(url: url) {
+            self.setDownloadImage(cashedImage)
+        } else {
+            self.dataTaskImage(url: url)
+        }
+    }
+    
+    private func dataTaskImage(url: String) {
+        guard let imageURL = URL(string: url) else { return }
+        URLSession.shared.dataTask(with: imageURL) { [weak self] data, response, error in
             guard
-                let data = data, error == nil
+                let data = data, error == nil,
+                let image = UIImage(data: data),
+                let `self` = self
             else { return }
             
-            DispatchQueue.main.async {
-                self.downloadImage = UIImage(data: data)
-            }
-            
+            self.imageCacheProvider.setCashedImage(image: image, url: url)
+            self.setDownloadImage(image)
         }.resume()
-        
+    }
+    
+    private func setDownloadImage(_ image: UIImage) {
+        DispatchQueue.main.async {
+            self.downloadImage = image
+        }
     }
 }
 

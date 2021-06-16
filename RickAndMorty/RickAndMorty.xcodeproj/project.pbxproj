@@ -129,9 +129,9 @@
 				CE33F4A9266F511900DB7995 /* AppDelegate.swift */,
 				CE33F4AB266F511900DB7995 /* SceneDelegate.swift */,
 				CEBC287F2671FBF100D03533 /* UI.swift */,
+				CEBC288126720EDE00D03533 /* ImageFromUrl.swift */,
 				CE33F4AF266F511B00DB7995 /* Assets.xcassets */,
 				CE33F4B4266F511B00DB7995 /* LaunchScreen.storyboard */,
-				CEBC288126720EDE00D03533 /* ImageFromUrl.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";

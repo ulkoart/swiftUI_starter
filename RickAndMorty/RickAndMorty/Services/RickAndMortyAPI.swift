@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 struct ApiResponse: Codable {
     let info: Info
     let results: [Character]

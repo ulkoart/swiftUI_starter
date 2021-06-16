@@ -18,12 +18,17 @@ struct CharacterListView: View {
                 ForEach(viewModel.characters) { character in
                     VStack {
                         NavigationLink(destination: CharacterView(character: character)) {
-                            Text(character.name)
+                            VStack(alignment: .leading) {
+                                Text(character.name)
+                                    .font(.headline)
+                                Text(character.species)
+                            }
                         }
                         if self.viewModel.dataLoading && self.viewModel.isCharacterLast(character) {
                             ActivityIndicator(isAnimating: .constant(true), style: .large)
                         }
-                    }.onAppear {
+                    }
+                    .onAppear {
                         if self.viewModel.isCharacterLast(character) {
                             self.viewModel.loadMoreCharacters()
                         }
