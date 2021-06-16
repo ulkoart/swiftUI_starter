@@ -12,6 +12,10 @@ struct CharacterListView: View {
     
     @EnvironmentObject var viewModel: CharacterListViewModel
     
+    init() {
+        UITableView.appearance().showsVerticalScrollIndicator = false
+    }
+    
     var body: some View {
         NavigationView {
             List {

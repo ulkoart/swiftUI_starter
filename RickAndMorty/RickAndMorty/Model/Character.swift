@@ -12,8 +12,10 @@ struct Character {
     let id: Int
     let name: String
     let status: String
+    let gender: String
     let species: String
     let image: String
+    let episode: [String]
 }
 
 extension Character: Codable {}
