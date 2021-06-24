@@ -29,7 +29,7 @@ struct CharacterEpisodeViewCell: View {
             Text(episodeNumberString)
                 .font(.title)
         }
-        .frame(width: 80, height: 80)
+        .frame(width: 60, height: 60)
         .background(Color.gray.opacity(0.2))
         .cornerRadius(15)
     }
@@ -74,8 +74,7 @@ struct CharacterView: View {
                     ForEach(character.episode, id: \.self) { episode in
                         CharacterEpisodeViewCell(episode: episode)
                     }
-                    
-                }.frame(maxWidth: .infinity, alignment: .center)
+                }
             }
             Spacer()
         }

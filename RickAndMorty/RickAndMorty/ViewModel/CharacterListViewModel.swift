@@ -8,9 +8,7 @@
 
 import Foundation
 
-protocol CharacterViewModelProtocol {}
-
-final class CharacterListViewModel: ObservableObject, CharacterViewModelProtocol {
+final class CharacterListViewModel: ObservableObject {
     
     @Published private(set) var characters = [Character]()
     @Published private(set) var dataLoading: Bool = false
@@ -22,9 +20,9 @@ final class CharacterListViewModel: ObservableObject, CharacterViewModelProtocol
     
     func loadCharacters() {
         self.dataLoading = true
-        RickAndMortyAPI.charactersGet(page: page) { characters, error in
+        RickAndMortyAPI.charactersGet(page: page) { [weak self] characters, error in
             guard let characters = characters else { return }
-            self.appendCharacters(characters)
+            self?.appendCharacters(characters)
         }
     }
     

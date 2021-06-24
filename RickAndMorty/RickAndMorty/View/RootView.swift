@@ -30,12 +30,13 @@ struct EpisodeListView: View {
 
 struct RootView: View {
     
-    @State private var selection = 0
-    
+    @EnvironmentObject var router: Router
+    @EnvironmentObject var characterListViewModel: CharacterListViewModel
+       
     var body: some View {
-        TabView(selection: $selection) {
+        TabView(selection: $router.tabSelection) {
             CharacterListView()
-                .environmentObject(CharacterListViewModel())
+                .environmentObject(characterListViewModel)
                 .tabItem {
                     Image(systemName: "person.3")
             }

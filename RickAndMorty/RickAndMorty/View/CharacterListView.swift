@@ -19,29 +19,35 @@ struct CharacterListView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(viewModel.characters) { character in
-                    VStack {
-                        NavigationLink(destination: CharacterView(character: character)) {
-                            VStack(alignment: .leading) {
-                                Text(character.name)
-                                    .font(.headline)
-                                Text(character.species)
-                            }
-                        }
-                        if self.viewModel.dataLoading && self.viewModel.isCharacterLast(character) {
-                            ActivityIndicator(isAnimating: .constant(true), style: .large)
-                        }
-                    }
-                    .onAppear {
-                        if self.viewModel.isCharacterLast(character) {
-                            self.viewModel.loadMoreCharacters()
-                        }
-                    }
-                }
+                characters
             }
             .navigationBarTitle("Персонажи")
         }
     }
+    
+    var characters: some View {
+        ForEach(viewModel.characters) { character in
+            VStack {
+                NavigationLink(destination: CharacterView(character: character)) {
+                    VStack(alignment: .leading) {
+                        Text(character.name)
+                            .font(.headline)
+                        Text(character.species)
+                    }
+                }
+                if self.viewModel.dataLoading && self.viewModel.isCharacterLast(character) {
+                    ActivityIndicator(isAnimating: .constant(true), style: .large)
+                }
+            }
+            .onAppear {
+                if self.viewModel.isCharacterLast(character) {
+                    self.viewModel.loadMoreCharacters()
+                }
+            }
+        }
+        
+    }
+    
 }
 
 struct PersonListView_Previews: PreviewProvider {
