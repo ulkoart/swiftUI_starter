@@ -8,6 +8,26 @@
 
 import SwiftUI
 
+
+struct CharacterListCellView: View {
+    let character: Character
+    let dataLoading: Bool
+    let isCharacterLast: Bool
+    
+    var body: some View {
+        NavigationLink(destination: CharacterView(character: character)) {
+            VStack(alignment: .leading) {
+                Text(character.name)
+                    .font(.headline)
+                Text(character.species)
+            }
+        }
+        if dataLoading && isCharacterLast {
+            ActivityIndicator(isAnimating: .constant(true), style: .large)
+        }
+    }
+}
+
 struct CharacterListView: View {
     
     @EnvironmentObject var viewModel: CharacterListViewModel
@@ -18,36 +38,25 @@ struct CharacterListView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                characters
-            }
-            .navigationBarTitle("Персонажи")
+            List { characters }
+                .navigationBarTitle("Персонажи")
         }
     }
     
     var characters: some View {
-        ForEach(viewModel.characters) { character in
+        return ForEach(viewModel.characters) { character in
             VStack {
-                NavigationLink(destination: CharacterView(character: character)) {
-                    VStack(alignment: .leading) {
-                        Text(character.name)
-                            .font(.headline)
-                        Text(character.species)
-                    }
-                }
-                if self.viewModel.dataLoading && self.viewModel.isCharacterLast(character) {
-                    ActivityIndicator(isAnimating: .constant(true), style: .large)
-                }
+                CharacterListCellView(
+                    character: character, dataLoading: viewModel.dataLoading, isCharacterLast: viewModel.isCharacterLast(character)
+                )
             }
             .onAppear {
-                if self.viewModel.isCharacterLast(character) {
-                    self.viewModel.loadMoreCharacters()
+                if viewModel.isCharacterLast(character) {
+                    viewModel.loadMoreCharacters()
                 }
             }
         }
-        
     }
-    
 }
 
 struct PersonListView_Previews: PreviewProvider {

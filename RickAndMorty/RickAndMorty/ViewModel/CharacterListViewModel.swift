@@ -27,6 +27,7 @@ final class CharacterListViewModel: ObservableObject {
     }
     
     func loadMoreCharacters() {
+        guard dataLoading == false else { return }
         self.page += 1
         self.loadCharacters()
     }

@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+
+
 struct CharacterEpisodeViewCell: View {
     var episodeNumberString: String
     
@@ -15,13 +17,10 @@ struct CharacterEpisodeViewCell: View {
         let episodeArray = episode.split(separator: "/")
 
         if let episodeNumberString = episodeArray.last {
-            
             self.episodeNumberString = String(episodeNumberString)
         } else {
             self.episodeNumberString = "?"
         }
-
-        
     }
     
     var body: some View {
@@ -29,9 +28,7 @@ struct CharacterEpisodeViewCell: View {
             Text(episodeNumberString)
                 .font(.title)
         }
-        .frame(width: 60, height: 60)
-        .background(Color.gray.opacity(0.2))
-        .cornerRadius(15)
+        .episodeViewCell()
     }
 }
 
