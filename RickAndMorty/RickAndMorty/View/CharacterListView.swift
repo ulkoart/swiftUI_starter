@@ -15,16 +15,19 @@ struct CharacterListCellView: View {
     let isCharacterLast: Bool
     
     var body: some View {
-        NavigationLink(destination: CharacterView(character: character)) {
-            VStack(alignment: .leading) {
-                Text(character.name)
-                    .font(.headline)
-                Text(character.species)
+        return VStack {
+            NavigationLink(destination: CharacterView(character: character)) {
+                VStack(alignment: .leading) {
+                    Text(character.name)
+                        .font(.headline)
+                    Text(character.species)
+                }
+            }
+            if dataLoading && isCharacterLast {
+                ActivityIndicator(isAnimating: .constant(true), style: .large)
             }
         }
-        if dataLoading && isCharacterLast {
-            ActivityIndicator(isAnimating: .constant(true), style: .large)
-        }
+
     }
 }
 
@@ -47,12 +50,12 @@ struct CharacterListView: View {
         return ForEach(viewModel.characters) { character in
             VStack {
                 CharacterListCellView(
-                    character: character, dataLoading: viewModel.dataLoading, isCharacterLast: viewModel.isCharacterLast(character)
+                    character: character, dataLoading: self.viewModel.dataLoading, isCharacterLast: self.viewModel.isCharacterLast(character)
                 )
             }
             .onAppear {
-                if viewModel.isCharacterLast(character) {
-                    viewModel.loadMoreCharacters()
+                if self.viewModel.isCharacterLast(character) {
+                    self.viewModel.loadMoreCharacters()
                 }
             }
         }

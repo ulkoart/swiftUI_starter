@@ -58,8 +58,8 @@ struct CharacterView: View {
                 .padding(.bottom, 4)
                 
             }
-            .padding(.leading, 10)
-            .padding(.trailing, 10)
+            .padding([.leading, .trailing], 10)
+            // .padding(.trailing, 10)
             .frame(maxWidth: .infinity, alignment: .center)
             
             // MARK: - episode
@@ -71,7 +71,7 @@ struct CharacterView: View {
                     ForEach(character.episode, id: \.self) { episode in
                         CharacterEpisodeViewCell(episode: episode)
                     }
-                }
+                }.padding([.leading, .trailing], 10)
             }
             Spacer()
         }
